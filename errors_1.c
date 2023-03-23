@@ -1,5 +1,4 @@
 #include "monty.h"
-global_var var_global;
 
 /**
  * main - driver function for monty program
@@ -9,12 +8,16 @@ global_var var_global;
  */
 int main(int ac, char **av)
 {
-stack_t *stack;
-stack = NULL;
+	stack_t *stack;
+
+	stack = NULL;
 	if (ac != 2)
-fprintf(stderr, "USAGE: monty file\n");
+	{
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
-read_file(av[1], &stack);
+	}
+
+	read_file(av[1], &stack);
     /* recordar liberar memorias */
 	free_dlistint(stack);
 	return (0);
