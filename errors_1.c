@@ -1,61 +1,21 @@
-include "monty.h"
+#include "monty.h"
+global_var var_global;
 
-int usage_error(void);
-int malloc_error(void);
-int f_open_error(char *filename);
-int unknown_op_error(char *opcode, unsigned int line_number);
-int no_int_error(unsigned int line_number);
 /**
- * usage_error - Prints usage messages
- *
- * Return: (EXIT_FAILURE) always.
+ * main - driver function for monty program
+ * @ac: int num of arguments
+ * @av: opcode file
+ * Return: 0
  */
-int usage_error(void)
+int main(int ac, char **av)
 {
-	fprintf(stderr, "USAGE: monty file\n");
-	return (EXIT_FAILURE);
-}
-/**
- * malloc_error - Prints malloc error messages.
- *
- * Return: (EXIT_FAILURE) always.
- */
-int malloc_error(void)
-{
-	fprintf(stderr, "Error: malloc falled\n");
-	return (EXIT_FAILURE);
-}
-/**
- * f_open_error - Prints file opening error message w/ file name.
- * @filename: Name of file failed to open
- *
- * Return: (EXIT_FAILURE);
- */
-int f_open_error(char *filename)
-{
-	fprintf(stderr, "Error: Can't open file %s\n", filename);
-	return (EXIT_FAILURE);
-}
-/**
- * unknown_open_error - Prints unknown instruction error messages.
- * @opcode: Opcode where error occurred.
- * @line_number: Line number in Monty bytecode file where error occurred.
- *
- * Return: (EXIT_FAILURE) always.
- */
-int unknown_op_error(char *opcode, unsigned int line_number);
-{
-	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-	return (EXIT_FAILURE);
-}
-/**
- * no_int_error - Prints invalid monty push argument error messages.
- * @line_number: Line number in Monty bytecodes file where error occurred.
- *
- * Return: (EXIT_FAILURE) always
- */
-int no_int_error(unsigned int line_number)
-{
-	fprintf(stderr, "L%u: usage: push integer\n", line_number);
-	return (EXIT_FAILURE);
+stack_t *stack;
+stack = NULL;
+	if (ac != 2)
+fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+read_file(av[1], &stack);
+    /* recordar liberar memorias */
+	free_dlistint(stack);
+	return (0);
 }
